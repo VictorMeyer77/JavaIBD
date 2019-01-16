@@ -25,7 +25,7 @@ public class BufRead {
 
         }catch (Exception e){
 
-            System.out.println("Erreur lors de l'ouverture");
+            System.out.println("Erreur lors de l'instanciation");
             System.exit(0);
         }
 
@@ -34,12 +34,9 @@ public class BufRead {
     public void printList(){
 
         try {
+
             reader.reset();
-        }catch (Exception e){
-            System.out.println("Error of rewind");
-        }
-        
-        try{
+
             while((line = reader.readLine()) != null ){
 
                 System.out.println(line);
@@ -62,18 +59,9 @@ public class BufRead {
 
             while ((line = reader.readLine()) != null) {
 
-                try {
-                    scoreStr = line.substring(line.indexOf(':') + 2);
-                } catch (Exception par) {
-                    System.out.println("Erreur de parsing de la ligne");
-                }
 
-                try {
-                    score = Integer.parseInt(scoreStr);
-                } catch (Exception t) {
-                    System.out.println("Erreur de conversion de score");
-                }
-
+                scoreStr = line.substring(line.indexOf(':') + 2);
+                score = Integer.parseInt(scoreStr);
                 listScore.add(score);
 
             }
@@ -89,13 +77,14 @@ public class BufRead {
         int sum = 0;
         float avg = 0;
 
-        for(int i = 0; i < listScore.size(); i += 1 ){
-            sum += listScore.get(i);
-        }
-
-
         try{
+
+            for(int i = 0; i < listScore.size(); i += 1 ){
+                sum += listScore.get(i);
+            }
+
             avg = sum / listScore.size();
+
         }catch (Exception ce){
             System.out.println("Error Getavg");
         }
@@ -127,21 +116,9 @@ public class BufRead {
         int ind = 0;
         try {
             reader.reset();
-        }catch (Exception e){
-            System.out.println("Error of rewind");
-        }
-
-        try{
             while((line = reader.readLine()) != null ){
 
-                try {
-                    mailComp = line.substring(0, line.indexOf(':') - 1);
-
-                }catch (Exception a){
-
-                    System.out.println("Ereur de parsing du fichier");
-                }
-
+                mailComp = line.substring(0, line.indexOf(':') - 1);
                 if(mailComp.equals(mail)){
                     score = listScore.get(ind);
                     break;
